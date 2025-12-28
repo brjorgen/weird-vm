@@ -1,0 +1,36 @@
+#+TITLE: Weird Vm
+#+OPTIONS: ^:nil
+* Weird Vm - The bullshit VM you didn't know you wanted to hack on
+* What this is
+  This is a small bytecode VM.
+  It comes with an assembler and a disassembler for your programs.
+  It's silly, really. You'll see.
+  
+* Documentation
+** Instructions
+   the instructions are 8-bit wide. wow.
+   They're here:
+   | name   | opcode | description                                                                                         | Implemented? |
+   |--------+--------+-----------------------------------------------------------------------------------------------------+--------------|
+   | NOP    |   0x00 | NO-OP                                                                                               | n            |
+   | ADD8   |   0x01 | Add next two operands as u8s,  put the result in RES registers                                      | y            |
+   | ADD16  |   0x11 | Add next two operands as u16s, put the result in RES registers                                      | y            |
+   | INC    |   0x21 | Increment operand (representing register)                                                           | n            |
+   | SUB8   |   0x02 | Sub next two operands as u8s,  put the result in RES registers                                      | n            |
+   | SUB16  |   0x12 | Sub next two operands as u16s, put the result in RES registers                                      | n            |
+   | DEC    |   0x22 | Sub next two operands as u8s,  put the result in RES registers                                      | n            |
+   | MUL8   |   0x03 | Mul next two operands as u8s,  put the result in RES registers                                      | n            |
+   | MUL16  |   0x13 | Mul next two operands as u16s, put the result in RES registers                                      | n            |
+   | DIV8   |   0x04 | Div next two operands as u8s,  put the result in RES registers                                      | n            |
+   | DIV16  |   0x14 | Div next two operands as u16s, put the result in RES registers                                      | n            |
+   | PSHDAT |   0x05 | Pushes Next n pieces of data on the stack, fist operand defines type                                | n            |
+   | POPDAT |   0x15 | Pops pieces of data and places it in the RES register                                               | n            |
+   | PRINT  |   0x06 | Dumps the register specified in operand                                                             | y            |
+   | CMP    |   0x07 | Compares operand 1 and 2, and sets the CMP register.                                                | n            |
+   | JIZ    |   0x17 | If the comparison was to 0 and true, Sets link reg to current PC, sets PC to operand as u16         | n            |
+   | JEQ    |   0x27 | If the comparison was Equal and true, Sets link reg to current PC, sets PC to operand as u16        | n            |
+   | JIL    |   0x37 | If the comparison was Lesser than and true, Sets link reg to current PC, sets PC to operand as u16  | n            |
+   | JIG    |   0x47 | If the comparison was Greater than and true, Sets link reg to current PC, sets PC to operand as u16 | n            |
+   | JTO    |   0x57 | Unconditionally Jump                                                                                | n            |
+   | STO    |   0x08 | Stores into register (specified as operand 1) value (specified in operand 2)                        | n            |
+   | DRW    |   0xDD | Dumps contents of screen memory zone onto screen                                                    | n            |
